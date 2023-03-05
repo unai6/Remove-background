@@ -7,18 +7,14 @@ import { ImageStatus } from '@/types.d'
 
 import { useUploadStore } from '@/stores/upload'
 
-import { Cloudinary } from '@cloudinary/url-gen'
+import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen'
 import { backgroundRemoval } from '@cloudinary/url-gen/actions/effect'
 import Dropzone from 'dropzone'
 import 'dropzone/dist/dropzone.css'
 
 const cloudinary = new Cloudinary({
-  cloud: {
-    cloudName: 'unaigodev',
-  },
-  url: {
-    secure: true,
-  }
+  cloud: { cloudName: 'unaidev-3' },
+  url: { secure: true }
 })
 
 const formRef: Ref<null> = ref(null)
@@ -30,17 +26,17 @@ onMounted(() => {
     uploadMultiple: false,
     acceptedFiles: '.jpg, .png, .webp',
     maxFiles: 1,
-    url: 'https://api.cloudinary.com/v1_1/unaigodev/upload'
+    url: 'https://api.cloudinary.com/v1_1/unaidev-3/upload'
   })
 
   const uploadParams = {
-    'upload_preset': 'xj2szimy',
-    'api_key': '615181944749261',
+    'upload_preset': 'bwwviwuc',
+    'api_key': '147417285863367',
     folder: 'Remove bg',
-    timestamp: Date.now() / 1000,
+    timestamp: `${Date.now() / 1000}`,
   }
 
-  dropzone.on('sending', (file, xhr, formData: FormData) => {
+  dropzone.on('sending', (file: any, xhr: any, formData: FormData) => {
     image.value.status = ImageStatus.UPLOADING
 
     for (const [key, value] of Object.entries(uploadParams)) {
@@ -48,23 +44,19 @@ onMounted(() => {
     }
   })
 
-  dropzone.on('success', (file, response) => {
+  dropzone.on('success', (file: any, response: any) => {
     const { secure_url: url, public_id: publicId } = response
 
-    const nobgImage = cloudinary.image(publicId).effect(backgroundRemoval())
+    const nobgImage: CloudinaryImage = cloudinary.image(publicId).effect(backgroundRemoval())
 
     image.value.modified = nobgImage.toURL()
     image.value.status = ImageStatus.DONE
     image.value.original = url
-
-    // Create No bg image and save it to the store.
-
   })
 
-  dropzone.on('error', (file, response) => {
+  dropzone.on('error', (file: any, response: any) => {
     image.value.status = ImageStatus.ERROR
-
-    console.info('HA IDO MAL')
+    console.error(response, 'Something went wrong')
   })
 })
 </script>
