@@ -13,7 +13,7 @@ import Dropzone from 'dropzone'
 import 'dropzone/dist/dropzone.css'
 
 const cloudinary = new Cloudinary({
-  cloud: { cloudName: 'unaidev-3' },
+  cloud: { cloudName: 'unaidev-5' },
   url: { secure: true }
 })
 
@@ -26,17 +26,17 @@ onMounted(() => {
     uploadMultiple: false,
     acceptedFiles: '.jpg, .png, .webp',
     maxFiles: 1,
-    url: 'https://api.cloudinary.com/v1_1/unaidev-3/upload'
+    url: 'https://api.cloudinary.com/v1_1/unaidev-5/upload'
   })
 
   const uploadParams = {
-    'upload_preset': 'bwwviwuc',
-    'api_key': '147417285863367',
+    'upload_preset': 'oveohxsv',
+    'api_key': '947833592545171',
     folder: 'Remove bg',
     timestamp: `${Date.now() / 1000}`,
   }
 
-  dropzone.on('sending', (file: any, xhr: any, formData: FormData) => {
+  dropzone.on('sending', (file: File, xhr: any, formData: FormData) => {
     image.value.status = ImageStatus.UPLOADING
 
     for (const [key, value] of Object.entries(uploadParams)) {
@@ -44,7 +44,7 @@ onMounted(() => {
     }
   })
 
-  dropzone.on('success', (file: any, response: any) => {
+  dropzone.on('success', (file: File, response: any) => {
     const { secure_url: url, public_id: publicId } = response
 
     const nobgImage: CloudinaryImage = cloudinary.image(publicId).effect(backgroundRemoval())
@@ -54,7 +54,7 @@ onMounted(() => {
     image.value.original = url
   })
 
-  dropzone.on('error', (file: any, response: any) => {
+  dropzone.on('error', (file: File, response: any) => {
     image.value.status = ImageStatus.ERROR
     console.error(response, 'Something went wrong')
   })

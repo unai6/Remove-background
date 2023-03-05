@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import type { Ref } from 'vue'
 
 import 'two-up-element'
@@ -9,26 +9,30 @@ const { image } = useUploadStore()
 
 const isProcessing: Ref<Boolean> = ref(true)
 
+function handleImageLoad () {
+  isProcessing.value = false
+}
+
 function handleImageError (event: any) {
   // This setTimeout is needed to avoid calling extra times to cloudinary API.
   // as the first render will alway throw 423 error.
 
   setTimeout(() => {
-    isProcessing.value = false
+    isProcessing.value = true
 
     event.target.src = image.modified
-  }, 10000)
+  }, 15000)
 }
 </script>
 
 <template>
-  <p v-if="isProcessing && !image.modified">Processing image...</p>
+  <p v-if="isProcessing">Processing image...</p>
   <two-up>
     <img :src="image.original" alt="Original image">
     <img
       :src="image.modified"
       alt="Modified image"
-      @load="() => isProcessing = true"
+      @load="handleImageLoad"
       @error="handleImageError"
     >
   </two-up>
