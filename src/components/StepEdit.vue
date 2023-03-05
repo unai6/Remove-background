@@ -22,7 +22,7 @@ function handleImageError (event: any) {
 </script>
 
 <template>
-  <p v-if="isProcessing">Processing image...</p>
+  <p v-if="isProcessing && !image.modified">Processing image...</p>
   <two-up>
     <img :src="image.original" alt="Original image">
     <img
