@@ -1,5 +1,5 @@
 import { defineStore, StoreDefinition } from 'pinia'
-import { ImageStatus } from '@/types.d.ts'
+import { ImageStatus } from '../types.d'
 
 interface State {
   image: Image,

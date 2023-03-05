@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import type { Ref } from 'vue'
 import { storeToRefs } from 'pinia'
 
-import { ImageStatus } from '@/types.d'
+import { ImageStatus } from '../types.d'
 
-import { useUploadStore } from '@/stores/upload'
+import { useUploadStore } from '../stores/upload'
 
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen'
 import { backgroundRemoval } from '@cloudinary/url-gen/actions/effect'

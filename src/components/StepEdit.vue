@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import type { Ref } from 'vue'
 
 import 'two-up-element'
-import { useUploadStore } from '@/stores/upload'
+import { useUploadStore } from '../stores/upload'
 
 const { image } = useUploadStore()
 

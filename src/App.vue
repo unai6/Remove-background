@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import StepUpload from '@/components/StepUpload.vue'
-import StepEdit from '@/components/StepEdit.vue'
+import StepUpload from './components/StepUpload.vue'
+import StepEdit from './components/StepEdit.vue'
 
-import { useUploadStore } from '@/stores/upload'
+import { useUploadStore } from './stores/upload'
 
 const { image } = useUploadStore()
 </script>
