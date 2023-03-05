@@ -12,7 +12,6 @@ const { image } = useUploadStore()
     <header class="flex justify-center py-10">
       <h1 class="text-3xl text-center text-blue-900 font-bold tracking-lighter">remove<span class="text-blue-600">bg</span></h1>
     </header>
-
     <main class="w-full block">
       <StepUpload v-if="['READY', 'UPLOADING'].includes(image.status)" />
       <StepEdit v-else />
