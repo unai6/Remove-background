@@ -11,7 +11,6 @@ export const useUploadStore = defineStore('upload', {
       original: null,
       modified:  null,
       status: ImageStatus.READY,
-      cloudinaryStatus: 'pending',
     },
   })
 })
@@ -21,5 +20,4 @@ interface Image {
   original: String | null,
   modified: String | null,
   status: String,
-  cloudinaryStatus: String | null,
 }
