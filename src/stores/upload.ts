@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia'
-import { ImageStatus } from '@/types.d'
+import { defineStore, StoreDefinition } from 'pinia'
+import { ImageStatus } from '@/types.d.ts'
 
 interface State {
   image: Image,
 }
 
-export const useUploadStore = defineStore('upload', {
+export const useUploadStore: StoreDefinition = defineStore('upload', {
   state: (): State => ({
     image: {
       original: null,
