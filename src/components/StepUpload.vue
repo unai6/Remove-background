@@ -60,7 +60,7 @@ onMounted(() => {
 
 <template>
   <form id="dropzone" class="shadow-2xl border-dashed border-2 border-gray-300 rounded-lg aspect-video w-full flex items-center justify-center flex-col">
-    <p v-if="image.status === 'UPLOADING'">Uploading files...</p>
+    <p class="text-center text-2xl font-bold p-2" v-if="image.status === 'UPLOADING'">Uploading files...</p>
     <template v-if="image.status === 'READY'">
       <button class="pointer-events-none cursor-pointer rounded-full text-white text-xl font-bold px-4 py-2 bg-blue-600">
         Upload File
