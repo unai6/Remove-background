@@ -12,7 +12,7 @@ import Dropzone from 'dropzone'
 import 'dropzone/dist/dropzone.css'
 
 const cloudinary = new Cloudinary({
-  cloud: { cloudName: 'unaidev-5' },
+  cloud: { cloudName: 'unaidev-6' },
   url: { secure: true }
 })
 
@@ -23,12 +23,12 @@ onMounted(() => {
     uploadMultiple: false,
     acceptedFiles: '.jpg, .png, .webp',
     maxFiles: 1,
-    url: 'https://api.cloudinary.com/v1_1/unaidev-5/upload'
+    url: 'https://api.cloudinary.com/v1_1/unaidev-6/upload'
   })
 
   const uploadParams = {
-    'upload_preset': 'oveohxsv',
-    'api_key': '947833592545171',
+    'upload_preset': 'jk2rbjeb',
+    'api_key': '339967931488522',
     folder: 'Remove bg',
     timestamp: `${Date.now() / 1000}`,
   }
