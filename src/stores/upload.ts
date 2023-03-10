@@ -10,6 +10,7 @@ export const useUploadStore: StoreDefinition = defineStore('upload', {
     image: {
       original: null,
       modified:  null,
+      blurred: null,
       status: ImageStatus.READY,
     },
   })
@@ -19,5 +20,6 @@ export const useUploadStore: StoreDefinition = defineStore('upload', {
 interface Image {
   original: string | null,
   modified: string | null,
+  blurred: string | null,
   status: string,
 }

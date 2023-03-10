@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, onBeforeUnmount } from 'vue'
+import { ref, onBeforeUnmount, computed } from 'vue'
 import type { Ref } from 'vue'
 
 import 'two-up-element'
@@ -9,17 +9,12 @@ const { image } = useUploadStore()
 
 const isProcessing: Ref<Boolean> = ref(true)
 
-function handleImageLoad () {
-  isProcessing.value = false
-}
-
 const intervalId: Ref<any> = ref(null)
 const counter: Ref<number> = ref(0)
 
 const progress = {
   max: 10,
   min: 1,
-  step: 1,
 }
 
 intervalId.value = setInterval(() => {
@@ -33,8 +28,12 @@ onBeforeUnmount(() => {
   clearInterval(intervalId.value)
 })
 
+function handleImageLoad () {
+  isProcessing.value = false
+}
+
 function handleImageError (event: any) {
-  // This setTimeout is needed to avoid calling extra times to cloudinary API.
+  // This setTimeout is needed to avoid calling extra times to cloudinary API
   // as the first render will alway throw 423 error.
 
   setTimeout(() => {
@@ -43,23 +42,28 @@ function handleImageError (event: any) {
     event.target.src = image.modified
   }, 15000)
 }
+
+const availableImage = computed(() => isProcessing.value ? image.blurred : image.modified)
 </script>
 
 <template>
   <progress
     v-if="isProcessing"
-    class="step-edit__progress block m-auto mb-10"
+    class="step-edit__progress ease-linear block m-auto mb-10"
     :value="counter"
-    :step="progress.step"
     :max="progress.max"
     :min="progress.min"
   />
 
-  <two-up >
-    <img class="object-fit" :src="image.original" alt="Original image">
+  <two-up>
     <img
-      class="object fit"
-      :src="image.modified"
+      class="object-cover h-48 w-96"
+      :src="image.original"
+      alt="Original image"
+    >
+    <img
+      class="object-cover h-48 w-96"
+      :src="availableImage"
       alt="Modified image"
       @load="handleImageLoad"
       @error="handleImageError"
@@ -83,5 +87,6 @@ function handleImageError (event: any) {
 .step-edit__progress[value]::-webkit-progress-value {
   background-color: rgb(59 130 246);
   border-radius: 10px;
+  transition: width 0.5s ease;
 }
 </style>

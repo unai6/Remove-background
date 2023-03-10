@@ -10,7 +10,7 @@ const { image } = useUploadStore()
 <template>
   <div class="max-w-xl m-auto grid grid-cols-1 place-content-center w-full h-screen p-4">
     <header class="flex justify-center py-10">
-      <h1 class="text-3xl text-center text-blue-900 font-bold tracking-lighter">remove<span class="text-blue-600">bg</span></h1>
+      <h1 class="text-3xl flex items-start text-center text-blue-900 font-bold tracking-lighter">remove<span class="text-blue-600">bg</span>&nbsp;<img class="h-10" src="/remove-logo.svg"></h1>
     </header>
     <main class="w-full block">
       <StepUpload v-if="['READY', 'UPLOADING'].includes(image.status)" />
